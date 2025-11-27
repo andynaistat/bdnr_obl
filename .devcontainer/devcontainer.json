@@ -1,13 +1,10 @@
 {
-  "name": "bdnr-parquet-python",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11-bookworm",
-  "features": {
-    "ghcr.io/devcontainers/features/common-utils:2": {
-      "username": "vscode",
-      "installZsh": false,
-      "upgradePackages": true
-    }
-  },
+  "name": "bdnr-parquet-python-neo4j",
+  
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/bdnr-parquet-python",
+
   "customizations": {
     "vscode": {
       "settings": {
@@ -22,6 +19,8 @@
       ]
     }
   },
+
   "postCreateCommand": "python -m pip install --upgrade pip && pip install -r requirements.txt",
+  
   "remoteUser": "vscode"
 }
