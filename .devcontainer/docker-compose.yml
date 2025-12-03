@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # 1. Entorno de Python
+  app:
+    image: mcr.microsoft.com/devcontainers/python:3.11-bookworm
+    volumes:
+      # Monta tu código dentro del contenedor
+      - ../:/workspaces/bdnr-parquet-python:cached
+    # Mantiene el contenedor vivo para que VS Code se conecte
+    command: sleep infinity
+    # Conecta este contenedor con Neo4j
+    links:
+      - neo4j
+
+  # 2. La base de datos Neo4j
+  neo4j:
+    image: neo4j:5.12
+    environment:
+      - NEO4J_AUTH=neo4j/password
+    ports:
+      - "7474:7474" # Browser
+      - "7687:7687" # Bolt
+    volumes:
+      - neo4j-data:/data
+
+volumes:
+  neo4j-data:
